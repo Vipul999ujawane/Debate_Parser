@@ -11,16 +11,34 @@ def get_user(html):
     user = link.split('/')[-1]
     return (user,link)
 
+def get_stance(html):
+    soup = BeautifulSoup(html,"html.parser")
+    stance = soup.find("div","subtext")
+    return stance.text
+
 def get_post(html):
-    pass
+    soup = BeautifulSoup(html,"html.parser")
+    body = soup.find("div",class_="argBody")
+    return body.text
 
 def parse_arguments(html):
     soup = BeautifulSoup(html,"html.parser")
     arguments = soup.find_all("div",class_="argBox")
-    get_user(str(arguments[0]))
+    parsed_arguments =[]
+    for arg in arguments:
+        temp={}
+        temp["user"]=get_user(str(arg))
+        temp["stance"]=get_stance(str(arg))
+        temp["post"]=get_stance(str(arg))
+        parsed_arguments.append(temp)
+
+    return parsed_arguments
 
 def get_user_arguments(response):
     soup = BeautifulSoup(response.text,"html.parser")
     left=soup.find("div",class_="debateSideBox sideL")
     right=soup.find("div",class_="debateSideBox sideR")
-    parse_arguments(str(left))
+    left_args = parse_arguments(str(left))
+    right_args = parse_arguments(str(right))
+
+    return left_args,right_args
