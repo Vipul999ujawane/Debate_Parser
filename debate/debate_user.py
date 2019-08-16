@@ -19,7 +19,7 @@ def get_stance(html):
 def get_post(html):
     soup = BeautifulSoup(html,"html.parser")
     body = soup.find("div",class_="argBody")
-    return body.text
+    return body.text.encode('utf-8').strip()
 
 def parse_arguments(html):
     soup = BeautifulSoup(html,"html.parser")
@@ -29,7 +29,7 @@ def parse_arguments(html):
         temp={}
         temp["user"]=get_user(str(arg))
         temp["stance"]=get_stance(str(arg))
-        temp["post"]=get_stance(str(arg))
+        temp["post"]=get_post(str(arg))
         parsed_arguments.append(temp)
 
     return parsed_arguments
