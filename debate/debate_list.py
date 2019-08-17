@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 url = "http://www.createdebate.com/browse/debates"
-num_pages = 695
+num_pages = 696
 offset =0
 browse_perpage=96
 
@@ -26,6 +26,8 @@ def get_debates_list(response):
 
 
 def get_all_debates():
+    all_debates=[]
+    offset=0
     for i in range(num_pages):
         data ={
         "browse_who":"all",
@@ -39,6 +41,8 @@ def get_all_debates():
         }
         r = requests.post(url,data=data)
         ans = get_debates_list(r)
-        for i in ans:
-            print(i[0])
+        for iter in ans:
+            all_debates.append(iter)
         offset+=browse_perpage
+
+    return all_debates
