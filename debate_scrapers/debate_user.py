@@ -1,5 +1,3 @@
-#! /usr/bin/python
-
 import requests
 
 from bs4 import BeautifulSoup
@@ -7,28 +5,30 @@ from bs4 import BeautifulSoup
 def get_user(html):
     soup = BeautifulSoup(html,"html.parser")
     a = soup.find("a")
+    if (a is None):
+    	return "-","-"
     link = "http:{}".format(a['href'])
     user = link.split('/')[-1]
-    return (user,link)
-
-def get_stance(html):
-    soup = BeautifulSoup(html,"html.parser")
-    stance = soup.find("div","subtext")
-    return stance.text
+    return (user, link)
 
 def get_post(html):
     soup = BeautifulSoup(html,"html.parser")
-    body = soup.find("div",class_="argBody")
+    body = soup.find("div", class_="argBody")
+    if (body is None):
+    	return "-"
     return body.text.encode('utf-8').strip()
 
-def get_sides(html):
-    soup = BeautifulSoup(html,"html.parser")
-    sides = soup.find_all("h2",class_="sideTitle")
-    sides_parsed=[]
+def get_sides(response):
+    soup = BeautifulSoup(response.text, "html.parser")
+    sides = soup.find_all("h2", class_ = "sideTitle")
+    sides_parsed = []
     for side in sides:
         sides_parsed.append(side.text)
-    
-    return sides_parsed
+    if (len(sides_parsed) == 2):
+        return sides_parsed[0], sides_parsed[1]
+    if (len(sides_parsed) == 1):
+        return sides_parsed[0], "-"
+    return "-", "-"
 
 def parse_arguments(html):
     soup = BeautifulSoup(html,"html.parser")
@@ -36,9 +36,9 @@ def parse_arguments(html):
     parsed_arguments =[]
     for arg in arguments:
         temp={}
-        temp["user"]=get_user(str(arg))
-        temp["stance"]=get_stance(str(arg))
-        temp["post"]=get_post(str(arg))
+        temp["user"] = get_user(str(arg))
+        temp["time"], temp["stance"] = get_stance(str(arg))
+        temp["post"] = get_post(str(arg))
         parsed_arguments.append(temp)
 
     return parsed_arguments
