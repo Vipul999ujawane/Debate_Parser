@@ -3,8 +3,9 @@
 import io
 import os
 import sys
+directory = "debate_stats_specific"
 
-os.mkdir("debate_stats")
+os.mkdir(directory)
 with io.open("debates_info.txt" , "r", encoding='utf-8') as f:
     for line in f.readlines()[1:]:
         debate_topic = line.split('\t')[0]
@@ -28,7 +29,7 @@ with io.open("debates_info.txt" , "r", encoding='utf-8') as f:
         if (len(lines) == 1):
             continue
 
-        with io.open("debate_stats/{}.txt".format(debate_topic), "w+", encoding='utf-8') as f1:
+        with io.open("{}/{}.txt".format(directory, debate_topic), "w+", encoding='utf-8') as f1:
             f1.write("\t".join(["Debate_Topic", "Stance1", "Stance2", "User_Name", "Side", "Stance", "Time", "Post"]))
             f1.write("\n")
             f1.flush()
@@ -37,5 +38,8 @@ with io.open("debates_info.txt" , "r", encoding='utf-8') as f:
                 if (len(info) != 8):
                     continue
                 user, side, stance, time, post = info[3].rstrip(), info[2].rstrip(), info[6].rstrip(), info[5].rstrip(), info[7].rstrip()
+                if (stance not in {stance1, stance2}):
+                    continue
                 f1.write("\t".join([debate_topic, stance1, stance2, user, side, stance, time, post]))
+                f1.write("\n")
                 f1.flush()
