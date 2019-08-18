@@ -21,6 +21,15 @@ def get_post(html):
     body = soup.find("div",class_="argBody")
     return body.text.encode('utf-8').strip()
 
+def get_sides(html):
+    soup = BeautifulSoup(html,"html.parser")
+    sides = soup.find_all("h2",class_="sideTitle")
+    sides_parsed=[]
+    for side in sides:
+        sides_parsed.append(side.text)
+    
+    return sides_parsed
+
 def parse_arguments(html):
     soup = BeautifulSoup(html,"html.parser")
     arguments = soup.find_all("div",class_="argBox")
