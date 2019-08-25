@@ -13,10 +13,10 @@ This scraper and the utility scripts here can be used to scrape debates and user
 				    Then create text files for each topic to store the motions topic wise.
 				    Also create dictionaries: 'dict_motion2topic' and 'dict_topic2motion'.
 
-	get_all_responses - We then create the debate urls for each debate motion and fetch the response of that page and 
-	                    store it in a serialized binary file in 'Debate_Responses'.
+	get_all_responses - We then create the debate urls for each debate motion and fetch the response of that page
+			    and store it in a serialized binary file in 'Debate_Responses'.
 
-	parse_stances - We parse the response files to extract the sides FOR and AGAINST and store in 'dict_motion2sides'.
+	parse_stances - We parse the response files to extract the sides FOR - AGAINST and store in 'dict_motion2sides'.
 
 	parse_arguments - We parse the response files to extract the argument parameters and store in 'Debate_Arguments'.
 
@@ -54,10 +54,12 @@ This scraper and the utility scripts here can be used to scrape debates and user
 	Debate_Respones       => ["DebateUUID" for UUID in motion2uuid.values()] binary files.
 
 	Debate_Arguments      => ["DebateUUID.txt" for UUID in motion2uuid.values()] text files.
-	within each file      => "\t".join(["DebateMotion", "ArgumentSide", "UserName", "Time", "ArgumentStance", "Votes", "Post"])
+	within each file      => "\t".join(["DebateMotion", "ArgumentSide", "UserName", "Time", "ArgumentStance", 
+					    "Votes", "Post"])
 
 	User_Arguments        => ["UserUUID" for UUID in user2uuid.values()] text files
-	within each file      => "\t".join(["UserName", "DebateMotion", "ArgumentSide", "ArgumentStance", "Votes", "Time", "Post"])
+	within each file      => "\t".join(["UserName", "DebateMotion", "ArgumentSide", "ArgumentStance", "Votes",
+					    "Time", "Post"])
 
 	UserProfile_Responses => ["UserUUID" for UUID in user2uuid.values()] binary files
 
