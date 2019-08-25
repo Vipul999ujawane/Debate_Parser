@@ -16,7 +16,7 @@ This scraper and the utility scripts here can be used to scrape debates and user
 	get_all_responses - We then create the debate urls for each debate motion and fetch the response of that page
 			    and store it in a serialized binary file in 'Debate_Responses'.
 
-	parse_stances - We parse the response files to extract the sides FOR - AGAINST and store in 'dict_motion2sides'.
+	parse_sidestances - We parse the response files to extract the side stances and store in 'dict_motion2sidestances'.
 
 	parse_arguments - We parse the response files to extract the argument parameters and store in 'Debate_Arguments'.
 
@@ -32,11 +32,11 @@ This scraper and the utility scripts here can be used to scrape debates and user
 ## Formats
 
 ### Dictionaries
-	motion2uuid  => {motion    : uuid 		}
-	motion2topic => {motion    : [topics]		}
-	topic2motion => {topic     : [motions]		}
-	motion2sides => {motion    : [side1, side2]	}
-	user2uuid    => {user_name : uuid 		}
+	motion2uuid  		=> {motion    : uuid 		}
+	motion2topic 		=> {motion    : [topics]		}
+	topic2motion 		=> {topic     : [motions]		}
+	motion2sidesstances => {motion    : [side1, side2]	}
+	user2uuid    		=> {user_name : uuid 		}
 
 ### Text Files
 	data_motion2uuid.txt 	 => "\t".join(["motion"   , "uuid"])

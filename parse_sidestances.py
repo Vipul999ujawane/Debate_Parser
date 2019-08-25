@@ -18,7 +18,7 @@ src_directory = "Debate_Responses"
 motion2uuid = pickle.load(open("dict_motion2uuid", 'rb'))
 motion2stances = dict()
 
-def parse_sides(motion):
+def parse_sidestances(motion):
     uuid = motion2uuid[motion]
     print(uuid)
     response = pickle.load(open("{}/Debate{}".format(src_directory, uuid), 'rb'))
@@ -44,4 +44,4 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     future = asyncio.ensure_future(get_data_asynchronous())
     loop.run_until_complete(future)
-    pickle.dump(motion2stances, open("dict_motion2sides", 'wb'))
+    pickle.dump(motion2stances, open("dict_motion2sidestances", 'wb'))

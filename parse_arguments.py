@@ -17,6 +17,7 @@ src_directory = "Debate_Responses"
 dest_directory = "Debate_Arguments"
 
 motion2uuid = pickle.load(open("dict_motion2uuid", 'rb'))
+motion2sides = pickle.load(open("dict_motion2sides", 'rb'))
 
 def parse_arguments(motion):
     uuid = motion2uuid[motion]
@@ -30,6 +31,9 @@ def parse_arguments(motion):
         f.flush()
 
         for args in left:
+            stance = args['stance']
+            if (stance not in motion2sides[motion]):
+                continue
             username = args['user']
             if (type(username) == bytes):
                 username = username.decode('utf-8')
@@ -38,6 +42,9 @@ def parse_arguments(motion):
             f.flush()
 
         for args in right:
+            stance = args['stance']
+            if (stance not in motion2sides[motion]):
+                continue
             username = args['user']
             if (type(username) == bytes):
                 username = username.decode('utf-8')
