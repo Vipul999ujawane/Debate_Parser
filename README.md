@@ -33,9 +33,9 @@ This scraper and the utility scripts here can be used to scrape debates and user
 
 ### Dictionaries
 	motion2uuid  		=> {motion    : uuid 		}
-	motion2topic 		=> {motion    : [topics]		}
-	topic2motion 		=> {topic     : [motions]		}
-	motion2sidesstances => {motion    : [side1, side2]	}
+	motion2topic 		=> {motion    : [topics]	}
+	topic2motion 		=> {topic     : [motions]	}
+	motion2sidesstances 	=> {motion    : [side1, side2]	}
 	user2uuid    		=> {user_name : uuid 		}
 
 ### Text Files
