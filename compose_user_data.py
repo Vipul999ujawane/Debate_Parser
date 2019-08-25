@@ -49,7 +49,7 @@ def compose_userdata(file):
         print(file)
         if (os.path.exists("{}/User{}.txt".format(dest_directory, user2uuid[user_name])) == False):
             with io.open("{}/User{}.txt".format(dest_directory, user2uuid[user_name]), "w+", encoding='utf-8') as f:
-                f.write("\t".join(["User", "Debate_Motion", "Side", "Stance", "Votes", "Time", "Post\n"]))
+                f.write("\t".join(["UserName", "DebateMotion", "ArgumentSide", "ArgumentStance", "Votes", "Time", "Post\n"]))
                 f.flush()
 
         with io.open("{}/User{}.txt".format(dest_directory, user2uuid[user_name]), "a", encoding='utf-8') as f:

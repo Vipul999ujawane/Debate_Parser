@@ -26,7 +26,7 @@ def parse_arguments(motion):
     left, right = get_user_arguments(response)
     print(uuid)
     with io.open("{}/Debate{}.txt".format(dest_directory, uuid), "w", encoding='utf-8') as f:
-        f.write("\t".join(["Motion", "Side", "User_Name", "Time", "Stance", "Votes", "Post\n"]))
+        f.write("\t".join(["DebateMotion", "ArgumentSide", "UserName", "Time", "ArgumentStance", "Votes", "Post\n"]))
         f.flush()
 
         for args in left:
