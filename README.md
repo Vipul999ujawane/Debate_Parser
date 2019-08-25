@@ -57,7 +57,7 @@ This scraper and the utility scripts here can be used to scrape debates and user
 	within each file      => "\t".join(["DebateMotion", "ArgumentSide", "UserName", "Time", "ArgumentStance", 
 					    "Votes", "Post"])
 
-	User_Arguments        => ["UserUUID" for UUID in user2uuid.values()] text files
+	User_Arguments        => ["UserUUID.txt" for UUID in user2uuid.values()] text files
 	within each file      => "\t".join(["UserName", "DebateMotion", "ArgumentSide", "ArgumentStance", "Votes",
 					    "Time", "Post"])
 
