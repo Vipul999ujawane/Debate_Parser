@@ -6,7 +6,7 @@ This scraper and the utility scripts here can be used to scrape debates and user
 ## Usage
 	get_all_debate_motion.py - We scrape the list of OPEN DEBATES from the ALL TOPICS Tab at the Website.
 				   Assigns a uuid to each debate and stores in a dictionary 'dict_motion2uuid' 
-				   and text file 'data_motion2uuid.txt'.
+				   and text file 'data_Motion2uuid.txt'.
 
 	get_all_motions_topicwise - We scrape the list of OPEN DEBATES from the different topic tabs one by one.
 				    Assign a uuid to those debate motions which were not present in 'dict_motion2uuid'
@@ -21,7 +21,8 @@ This scraper and the utility scripts here can be used to scrape debates and user
 	parse_arguments - We parse the response files to extract the argument parameters and store in 'Debate_Arguments'.
 
 	compose_user_data - We scan through all the files in 'Debate_Arguments' and compile all the arguments userwise.
-			    Also assign a uuid to all the usernames and store in dictionary 'dict_user2uuid'.
+			    Also assign a uuid to all the usernames and store in dictionary 'dict_user2uuid'
+			    and text file 'data_User2uuid.txt'
 
 	get_all_user_profile - We then create profile urls for each user name and fetch the response of that page and 
 	                       store it in a serialized binary file in 'UserProfile_Responses'.
@@ -39,8 +40,8 @@ This scraper and the utility scripts here can be used to scrape debates and user
 	user2uuid    		=> {user_name : uuid 		}
 
 ### Text Files
-	data_motion2uuid.txt 	 => "\t".join(["motion"   , "uuid"])
-	data_user2uuid.txt   	 => "\t".join(["user_name", "uuid"])
+	data_Motion2uuid.txt 	 => "\t".join(["motion"   , "uuid"])
+	data_User2uuid.txt   	 => "\t".join(["user_name", "uuid"])
 	data_UserInformation.txt => "\t".join(["UserName", "Name", "Gender", "Age", "MaritalStatus", "PoliticalParty",
 					       "Country", "Religion", "Education", "Points", "Efficiency", "Arguments",
 					       "Debates", "Joined"])
