@@ -5,25 +5,25 @@ from bs4 import BeautifulSoup
 def get_user(soup):
     a = soup.find("a")
     if (a is None):
-    	return "-", "-"
+        return "-"
     link = "http:{}".format(a['href'])
     user = link.split('/')[-1]
     return user
 
-def get_votes(soup):
-    points = soup.find("div", class_="argPoints")
-    if (points is None):
-    	return "-"
-    return points.text.split('\n')[0]
+def get_id(soup):
+    box = soup.find("div")
+    if (box is None):
+        return "-"
+    id = box['id']
+    return id
 
-def get_post(soup):
-    body = soup.find("div", class_="argBody")
-    if (body is None):
-    	return "-"
-    post = body.text
-    print(type(post))
-    post = re.sub('[\t\n\r]', '  ' , post)
-    return post.encode('utf-8')
+def get_type(soup):
+    header = soup.find("div", class_="updownTD")
+    soup = BeautifulSoup(str(header), "html.parser")
+    type = soup.find("span")
+    if (type is None):
+        return "Normal"
+    return type.text
 
 def get_time_stance(soup):
     stance = soup.find("div", "subtext")
@@ -31,6 +31,21 @@ def get_time_stance(soup):
         return "-", "-"
     tokens = stance.text.strip().split("Side:")
     return tokens[0].strip(), tokens[1].strip()
+
+def get_votes(soup):
+    points = soup.find("div", class_="argPoints")
+    if (points is None):
+        return "-"
+    return points.text.split('\n')[0]
+
+def get_post(soup):
+    body = soup.find("div", class_="argBody")
+    if (body is None):
+        return "-"
+    post = body.text
+    post = re.sub('[\t\n\r]', '  ' , post)
+    return post.encode('utf-8')
+
 
 def parse_arguments(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -40,6 +55,8 @@ def parse_arguments(html):
         soup = BeautifulSoup(str(arg), "html.parser")
         temp = {}
         temp["user"] = get_user(soup)
+        temp["id"] = get_id(soup)
+        temp["type"] = get_type(soup)
         temp["time"], temp["stance"] = get_time_stance(soup)
         temp["votes"] = get_votes(soup)
         temp["post"] = get_post(soup)
