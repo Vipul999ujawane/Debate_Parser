@@ -4,7 +4,7 @@ import io
 import os
 import pickle
 
-dest_directory = "User_Arguments"
+dest_directory = "User_Data"
 src_directory = "Debate_Arguments"
 
 user2uuid = dict()
@@ -23,7 +23,7 @@ with io.open("data_user2uuid.txt", "w", encoding='utf-8') as f:
                 f.write("{}\t{}\n".format(username, uuid))
                 f.flush()
                 user2uuid[username] = uuid
-                uuid +=1 
+                uuid +=1
             else:
                 print("*")
 
@@ -36,20 +36,22 @@ def compose_userdata(file):
     print(file)
     for line in lines[1:]:
         info = line.split('\t')
-        print(info[2])
-        
+
         debate_motion = info[0]
-        side = info[1]
-        user_name = info[2]
-        time = info[3]
-        stance = info[4]
-        votes = info[5]
-        post = info[6]
+        id = info[1]
+        side = info[2]
+        type = info[3]
+        user_name = info[4]
+        time = info[5]
+        stance = info[6]
+        votes = info[7]
+        post = info[8]
 
         print(file)
         if (os.path.exists("{}/User{}.txt".format(dest_directory, user2uuid[user_name])) == False):
             with io.open("{}/User{}.txt".format(dest_directory, user2uuid[user_name]), "w+", encoding='utf-8') as f:
-                f.write("\t".join(["UserName", "DebateMotion", "ArgumentSide", "ArgumentStance", "Votes", "Time", "Post\n"]))
+                f.write("\t".join(["UserName", "DebateMotion", "ArgumentID", "PostSide", "ArgumentType"
+                                   "ArgumentStance", "Votes", "PostTime", "Post\n"]))
                 f.flush()
 
         with io.open("{}/User{}.txt".format(dest_directory, user2uuid[user_name]), "a", encoding='utf-8') as f:

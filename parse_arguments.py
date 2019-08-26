@@ -27,7 +27,8 @@ def parse_arguments(motion):
     left, right = get_user_arguments(response)
     print(uuid)
     with io.open("{}/Debate{}.txt".format(dest_directory, uuid), "w", encoding='utf-8') as f:
-        f.write("\t".join(["DebateMotion", "ArgumentSide", "UserName", "Time", "ArgumentStance", "Votes", "Post\n"]))
+        f.write("\t".join(["DebateMotion", "ArgumentID", "PostSide", "ArgumentType", 
+                           "UserName", "PostTime", "ArgumentStance", "Votes", "Post\n"]))
         f.flush()
 
         for args in left:
@@ -53,7 +54,7 @@ def parse_arguments(motion):
             f.flush()
 
 async def get_data_asynchronous():
-    with ThreadPoolExecutor(max_workers=100) as executor:
+    with ThreadPoolExecutor(max_workers=500) as executor:
         loop = asyncio.get_event_loop()
         tasks = [
             loop.run_in_executor(
