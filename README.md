@@ -42,27 +42,62 @@ This scraper and the utility scripts here can be used to scrape debates and user
 ### Text Files
 	data_Motion2uuid.txt 	 => "\t".join(["motion"   , "uuid"])
 	data_User2uuid.txt   	 => "\t".join(["user_name", "uuid"])
-	data_UserInformation.txt => "\t".join(["UserName", "Name", "Gender", "Age", "MaritalStatus", "PoliticalParty",
-					       "Country", "Religion", "Education", "Points", "Efficiency", "Arguments",
-					       "Debates", "Joined"])
+	data_UserInformation.txt => "\t".join(["UserName", "Name", "Gender", "Age", "MaritalStatus",
+					       "PoliticalParty", "Country", "Religion", "Education",
+					        "Points", "Efficiency", "Arguments", "Debates", "Joined"])
 
 ### Directories
-	Topicwise_Motions     => ["Politics", "Entertainment", "World", "Religion", "Law", "Science", "Technology", 
-				  "Sports", "Comedy", "Business", "Travel", "Shopping", "Health", "NSFW"] 
-				  and "None" for motions without any assigned topic.	 				  
+	Topicwise_Motions     => ["Politics", "Entertainment", "World", "Religion", "Law", "Science",
+				  "Technology", "Sports", "Comedy", "Business", "Travel", "Shopping", 
+				  "Health", "NSFW"] and "None" for motions without any assigned topic.
 	within each file      => "\t".join(["motion", "uuid"])
 
 	Debate_Respones       => ["DebateUUID" for UUID in motion2uuid.values()] binary files.
 
 	Debate_Arguments      => ["DebateUUID.txt" for UUID in motion2uuid.values()] text files.
-	within each file      => "\t".join(["DebateMotion", "ArgumentSide", "UserName", "Time", "ArgumentStance", 
-					    "Votes", "Post"])
+	within each file      => "\t".join(["DebateMotion", "ArgumentID", "PostSide", "ArgumentType", 
+					    "UserName", "Time", "ArgumentStance", "Votes", "Post"])
 
 	User_Arguments        => ["UserUUID.txt" for UUID in user2uuid.values()] text files
-	within each file      => "\t".join(["UserName", "DebateMotion", "ArgumentSide", "ArgumentStance", "Votes",
-					    "Time", "Post"])
+	within each file      => "\t".join(["UserName", "DebateMotion", "ArgumentID", "PostSide", 
+					    "ArgumentType", "ArgumentStance", "Votes", "Time", "Post"])
 
 	UserProfile_Responses => ["UserUUID" for UUID in user2uuid.values()] binary files
 
+### Field Ranges
+
+#### Debate Specifics
+	motion 	     - Any String joined using '_' available on the BROWSE DEBATES Website Tab
+	topic 	     - Any String from the list mentioned in TopicWise_Motions description
+	sideL, sideR - Any String which is the floated pair of FOR-AGAINST stances by the debate creator
+
+#### User Specifics
+	UserName 	- Any String which has posted an argument in one of the debate responses collected
+	Name 		- Any String which is a valid text box input
+	Gender 		- ["Male", "Female", "Guy", "Girl", "Dude", "Lady", "Fellow", "grrrl", 
+			   "Chap", "Dame", "Transgender"]
+	Age 		- Approximate Age of Individual in Years
+	MaritalStatus 	- ["Single", "Married", "In a Relationship"]
+	Political Party - ["Republican", "Democrat", "Libertarian", "Green Party", "Independent", "Other"]
+	Country 	- Country Name from a Drop-Down List of all Countries
+	Religion 	- ["No Answer", "Agnostic", "Atheist", "Buddhist", "Catholic", "Christian-other",
+		    	   "Hindu", "Jewish", "Muslim", "Mormon", "Other", "Protestant", "Scientologist",
+			   "Taoist", "Wiccan"]
+	Education 	- ["No Answer", "High School", "Some College", "In College", "College Grad", 
+			   "Masters", "Post Grad"]	
+	Points 		- [0 - ) Number of Points earned by the user on the Website
+	Efficiency 	- [0 - 100] : Measure of effectiveness of arguments -> % of upvotes a user has
+	Arguments 	- [0 - ) : Number of Arguments posted by the user on the Website
+	Debates 	- [0 - ) : Number of Debates participated by the user on the Website
+	Joined 		- Approximate Date/Time of the user joining the Website
+	
+#### Argument Specifics
+	ArgumentID 	- "arg[0-9]+" assigned to each argument
+	PostSide 	- Left or Right, which side the post was posted
+	ArgumentType 	- ["Normal", "Supported", "Disputed", "Clarified"]
+	Time 		- Approximate Date/Time of Post
+	ArgumentStance 	- One of the two {sideL, sideR} for that debate
+	Votes 		- Total UpVotes - Total DownVotes
+	Post		- Textual Data of the Post
 
 
