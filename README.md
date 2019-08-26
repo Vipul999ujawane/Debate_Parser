@@ -99,5 +99,3 @@ This scraper and the utility scripts here can be used to scrape debates and user
 	ArgumentStance 	- One of the two {sideL, sideR} for that debate
 	Votes 		- Total UpVotes - Total DownVotes
 	Post		- Textual Data of the Post
-
-
